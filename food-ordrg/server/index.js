@@ -38,6 +38,17 @@ app.get('/sandwKc', (req, res) =>{
   })
 })
 
+app.get('/oneRest/:name', (req,res)=>{
+ db.query('select * from restaurent where name=?',req.params.name,(err,rest)=>{
+  console.log(req.params.name)
+
+  if(err){
+    res.send(err)
+  }else{
+    res.send(rest)
+  }
+ })
+})
 
 
 app.listen(port, () => {
