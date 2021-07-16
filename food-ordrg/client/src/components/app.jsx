@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import Restaurent from './Restaurent.jsx'
 import Cart from './Cart.jsx'
 import Search from './Search.jsx'
+import Favorite from './Favorite.jsx'
 
 import axios from 'axios'
 
@@ -14,12 +15,15 @@ export default class App extends Component {
           view: "list",
           restaurent:[],
           cart:[],
+          favori:[],
           name:"",
           oneRestaurent:{}
       }
     //   console.log(this.state.cart)
       this.changeView = this.changeView.bind(this)
+      this.changeViewNav = this.changeViewNav.bind(this)
       this.handleChange = this.handleChange.bind(this)
+
   }
   
 componentDidMount(){
@@ -39,6 +43,13 @@ handleChange(e){
         name: e.target.value
     })
 }
+
+changeViewNav(opt){
+    this.setState({
+        view: opt
+    })
+}
+
 
   changeView(option){
      
@@ -64,10 +75,12 @@ handleChange(e){
   renderView(){
       const {view} = this.state
       if(view === 'list'){
-          return <Restaurent restaurent={this.state.restaurent} cart={this.state.cart}  />
+          return <Restaurent restaurent={this.state.restaurent} cart={this.state.cart} favori={this.state.favori} />
       }else if(view === 'cart') {
           return <Cart cart={this.state.cart}/>
-      }else{
+      }else if(view === 'favorite') {
+        return <Favorite favori={this.state.favori}/>
+    }else{
           return <Search oneRestaurent={this.state.oneRestaurent}/>
       }
   }
@@ -76,14 +89,18 @@ handleChange(e){
        return(
        <div>
            <div className="nav">
-               <span className="logo" onClick={()=> this.changeView('list')}>
+               <span className="logo" onClick={()=> this.changeViewNav('list')}>
                    ZIZO-FOOD
                </span>
                <input type="text" onChange={(e)=>{this.handleChange(e)}}/>
                <button onClick={()=>this.changeView('search')}>Search</button>
-               <span className="nav-nun" onClick={()=> this.changeView('cart')}>
+               <span className="nav-nun" onClick={()=> this.changeViewNav('favorite')}>
+                   Favorite
+               </span>
+               <span className="nav-nun" onClick={()=> this.changeViewNav('cart')}>
                    Cart
                </span>
+            
                {/* <div>
                    <Restaurent restaurent={this.state.restaurent} cart={this.state.cart}/>
                </div> */}

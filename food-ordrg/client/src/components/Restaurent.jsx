@@ -11,6 +11,8 @@ export default class Restaurent extends React.Component {
     };
     // console.log(this.state.view)
     this.changeView = this.changeView.bind(this);
+    this.insertInFavorite = this.insertInFavorite.bind(this)
+
   }
 
   changeView = (elm) => {   
@@ -25,6 +27,10 @@ export default class Restaurent extends React.Component {
     // }
     
   };
+  insertInFavorite(elm){
+    var arr=this.props.favori.push(elm)
+  this.setState({ favori: arr})
+}
 
   renderView(){
     const {menu} = this.state
@@ -32,7 +38,7 @@ export default class Restaurent extends React.Component {
 
      if(menu.name === 'McDonalds' ){
         return <SandwichMc cart={this.props.cart} />
-    }else{
+    }else if(menu.name === 'KFC'){
         return <SandwichKfc cart={this.props.cart}/>
     }
   }
@@ -45,6 +51,7 @@ export default class Restaurent extends React.Component {
               <h5>{elm.name}</h5>
               <img src={elm.imageUrl} />
               <button onClick={() => this.changeView(elm)}>View</button>
+              <button onClick={() => this.insertInFavorite(elm)}>Favorite</button>
             </li>
           </ul>
         ))}
