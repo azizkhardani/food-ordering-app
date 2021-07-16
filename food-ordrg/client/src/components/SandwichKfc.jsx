@@ -2,12 +2,21 @@ import axios from 'axios';
 import React from 'react';
 
 export default class SandwichKfc extends React.Component {
-constructor() {
-    super();
+constructor(props) {
+    super(props);
     this.state={
-        sandwichsK:[]
-    };
+        sandwichsK:[],
+        cart: this.props.cart
 
+    };
+this.insertInCart = this.insertInCart.bind(this)
+
+
+}
+
+insertInCart(elm){
+    var arr=this.props.cart.push(elm)
+  this.setState({ cart: arr})
 }
 
 componentDidMount(){
@@ -36,7 +45,7 @@ render(){
                     <h5>{elm.name}</h5>
                     <img src={elm.imageUrl} />
                     <h4>{elm.price}</h4>
-                    <button>Get it</button>
+                    <button onClick={()=>this.insertInCart(elm)}>Get it</button>
                 </li>
                 </ul>
             ))

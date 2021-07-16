@@ -3,12 +3,9 @@ import React from "react";
 const Search = (props) => {
   return (
     <div>
-      <ul>
-        <li className="list-item">
-          <h5>{props.oneRestaurent.name}</h5>
-          <img src={props.oneRestaurent.imageUrl} />
-        </li>
-      </ul>
+      {console.log(props.oneRestaurent[0])}
+     <h5>{props.oneRestaurent[0].name}</h5>
+     <img src={props.oneRestaurent[0].imageUrl} />
     </div>
   );
 };

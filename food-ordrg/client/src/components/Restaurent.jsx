@@ -32,7 +32,7 @@ export default class Restaurent extends React.Component {
 
      if(menu.name === 'McDonalds' ){
         return <SandwichMc cart={this.props.cart} />
-    }else if(menu.name === 'KFC'){
+    }else{
         return <SandwichKfc cart={this.props.cart}/>
     }
   }

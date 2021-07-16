@@ -41,9 +41,7 @@ handleChange(e){
 }
 
   changeView(option){
-     this.setState({
-         view: option
-        })    
+     
 
         axios.get(`/oneRest/${this.state.name}`)
         .then((res)=>{
@@ -52,6 +50,11 @@ handleChange(e){
                 
                 oneRestaurent: res.data
             })
+            
+        }).then((res)=>{
+            this.setState({
+                view: option
+               })  
         })
         .catch((err)=>{
             console.log(err)
